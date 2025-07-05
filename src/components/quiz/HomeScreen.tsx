@@ -141,14 +141,24 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ onStartQuiz }) => {
                 <Users className="w-4 h-4" />
                 Players
               </Label>
-              <Input
-                type="number"
-                min="1"
-                max="50"
-                value={participants}
-                onChange={(e) => setParticipants(parseInt(e.target.value) || 1)}
-                className="glass-card border-glass-border bg-glass h-12"
-              />
+            <Input
+              type="number"
+              min="1"
+              max="50"
+              value={participants}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === '') {
+                  setParticipants(1);
+                } else {
+                  const num = parseInt(value);
+                  if (!isNaN(num) && num >= 1 && num <= 50) {
+                    setParticipants(num);
+                  }
+                }
+              }}
+              className="glass-card border-glass-border bg-glass h-12"
+            />
             </div>
           </div>
 
